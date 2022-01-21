@@ -39,11 +39,12 @@ router.route('/login').post((req, res) => {
                 if(result === null){
                     return  res.status(403).json(
                         {
-                            status: "Gagal login"
+                            status: "Gagal login",
+                            err: err
                         }
                     );
                 }else{
-                    let token = jwt.sign({result}, config.key, {
+                    let token = jwt.sign({username: req.body.username}, config.key, {
                         expiresIn: "24h"
                     })
                     return  res.json(

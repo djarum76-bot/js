@@ -12,9 +12,12 @@ connection.once('open', () => {
 })
 
 //middleware
+app.use("/uploads", express.static("uploads"))
 app.use(express.json())
 const userRoute = require('./routes/user')
 app.use('/user', userRoute)
+const profileRoute = require('./routes/profile')
+app.use('/profile', profileRoute)
 
 app.route('/').get((req, res) => {
     res.json({
@@ -22,6 +25,6 @@ app.route('/').get((req, res) => {
     })
 })
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0",() => {
     console.log(`Server started on port ${port}`);
 });
